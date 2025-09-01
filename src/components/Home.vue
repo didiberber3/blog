@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <div class="intro">
-      <h2>欢迎来到我的博客</h2>
-      <p>分享技术心得，记录生活点滴</p>
+      <h2>Didiberber's Blog</h2>
+      <p>这扯不扯？</p>
     </div>
     
     <div class="articles-list">
