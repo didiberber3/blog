@@ -19,6 +19,19 @@ const router = createRouter({
 const app = createApp(App)
 app.use(router)
 
+// 额外的URL清理检查
+function checkAndCleanUrl() {
+  const currentUrl = window.location.href;
+  
+  if (currentUrl.includes('~and~') || currentUrl.includes('?/&/')) {
+    console.log('Vue应用检测到问题URL，强制清理');
+    window.location.replace('https://didiberber3.github.io/blog/#/');
+    return false;
+  }
+  return true;
+}
 
-
-app.mount('#app')
+// 如果URL干净，才挂载应用
+if (checkAndCleanUrl()) {
+  app.mount('#app');
+}

@@ -8,6 +8,33 @@
   </head>
   <body>
     <div id="app"></div>
+    <script type="text/javascript">
+      // 紧急URL清理 - 在任何其他脚本执行前运行
+      (function() {
+        const currentUrl = window.location.href;
+        console.log('Current URL:', currentUrl);
+        
+        // 检查是否包含问题字符
+        if (currentUrl.includes('~and~') || currentUrl.includes('?/&/')) {
+          console.log('检测到问题URL，正在清理...');
+          
+          // 强制重定向到干净的URL
+          const cleanUrl = 'https://didiberber3.github.io/blog/#/';
+          console.log('重定向到:', cleanUrl);
+          
+          // 立即替换当前URL
+          window.location.replace(cleanUrl);
+          return;
+        }
+        
+        // 如果URL路径不正确，也进行修正
+        if (window.location.pathname === '/blog/' && !window.location.hash) {
+          const correctUrl = 'https://didiberber3.github.io/blog/#/';
+          window.location.replace(correctUrl);
+          return;
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.js"></script>
 
   </body>
