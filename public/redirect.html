@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>正在重定向...</title>
+    <script type="text/javascript">
+        // 强制清理URL中的~and~并重定向到正确地址
+        function cleanAndRedirect() {
+            const currentUrl = window.location.href;
+            
+            // 如果URL包含~and~，清理它
+            if (currentUrl.includes('~and~')) {
+                // 清理所有的~and~和其他问题字符
+                const cleanUrl = 'https://didiberber3.github.io/blog/#/';
+                
+                // 强制重定向到干净的URL
+                window.location.replace(cleanUrl);
+                return;
+            }
+            
+            // 如果URL包含?/&/，也清理它
+            if (currentUrl.includes('?/&/')) {
+                const cleanUrl = 'https://didiberber3.github.io/blog/#/';
+                window.location.replace(cleanUrl);
+                return;
+            }
+            
+            // 否则重定向到正常首页
+            window.location.replace('/blog/#/');
+        }
+        
+        // 立即执行清理
+        cleanAndRedirect();
+    </script>
+</head>
+<body>
+    <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h2>正在清理URL并重定向...</h2>
+        <p>如果页面没有自动跳转，请点击下面的链接：</p>
+        <a href="https://didiberber3.github.io/blog/#/" style="color: #007bff; text-decoration: none;">前往博客首页</a>
+    </div>
+</body>
+</html>

@@ -4,11 +4,29 @@
     <meta charset="utf-8">
     <title>GBlog - 极简博客</title>
     <script type="text/javascript">
-      // 简单的重定向到首页
-      window.location.replace('/blog/');
+      // 强制清理URL问题并重定向
+      function cleanAndRedirect() {
+        const currentUrl = window.location.href;
+        
+        // 如果URL包含~and~或其他问题字符，强制清理
+        if (currentUrl.includes('~and~') || currentUrl.includes('?/&/')) {
+          // 清理并重定向到干净的URL
+          window.location.replace('https://didiberber3.github.io/blog/#/');
+          return;
+        }
+        
+        // 正常重定向到首页
+        window.location.replace('/blog/#/');
+      }
+      
+      // 立即执行
+      cleanAndRedirect();
     </script>
   </head>
   <body>
-    <p>正在重定向到首页...</p>
+    <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+      <h2>正在重定向到首页...</h2>
+      <p>如果页面没有自动跳转，请点击：<a href="https://didiberber3.github.io/blog/#/">博客首页</a></p>
+    </div>
   </body>
 </html>
