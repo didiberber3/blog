@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/gblog/',
+  base: '/blog/',
   assetsInclude: ['**/*.md'],
   // 确保 markdown 文件可以作为字符串导入
   define: {
