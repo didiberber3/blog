@@ -1,0 +1,192 @@
+/* About.vue 组件特有样式 */
+
+.about {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: var(--spacing-2xl) var(--spacing-xl);
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: var(--spacing-4xl);
+  padding-bottom: var(--spacing-2xl);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.avatar-container {
+  margin-bottom: var(--spacing-xl);
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  border: 4px solid var(--color-primary);
+}
+
+.avatar-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-hover));
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--color-bg-primary);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.avatar-text {
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  color: white;
+}
+
+.owner-name {
+  font-size: var(--font-size-6xl);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.owner-description {
+  font-size: var(--font-size-2xl);
+  color: var(--color-text-secondary);
+  margin: 0;
+  font-weight: var(--font-weight-normal);
+}
+
+.links-section {
+  margin-bottom: var(--spacing-4xl);
+}
+
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-base);
+  margin-top: var(--spacing-base);
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--color-text-primary);
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-sm);
+}
+
+.social-link:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.social-link:active {
+  transform: scale(0.95) translateY(-2px);
+}
+
+.link-icon {
+  font-size: 1.75rem;
+  margin-right: var(--spacing-base);
+}
+
+.link-name {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-lg);
+}
+
+.content-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.content-editor {
+  position: relative;
+}
+
+.content-display {
+  background-color: var(--color-bg-secondary);
+  padding: var(--spacing-xl);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-primary);
+  min-height: 200px;
+  line-height: var(--line-height-normal);
+}
+
+.content-display h1,
+.content-display h2,
+.content-display h3 {
+  color: var(--color-text-primary);
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.content-display h1:first-child,
+.content-display h2:first-child,
+.content-display h3:first-child {
+  margin-top: 0;
+}
+
+.content-display ul {
+  padding-left: var(--spacing-xl);
+}
+
+.content-display li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.content-textarea {
+  width: 100%;
+  min-height: 300px;
+  padding: var(--spacing-base);
+  border: 1px solid var(--color-border-secondary);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  resize: vertical;
+}
+
+.content-textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.edit-actions {
+  margin-top: var(--spacing-base);
+  display: flex;
+  gap: var(--spacing-base);
+}
+
+/* 编辑操作按钮使用全局样式 */
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .about {
+    padding: var(--spacing-base);
+  }
+  
+  .links-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .avatar-placeholder,
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .avatar-text {
+    font-size: 2.5rem;
+  }
+}

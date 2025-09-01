@@ -1,137 +1,206 @@
 <template>
-  <div class="home">
-    <div class="intro">
-      <h2>Didiberber's Blog</h2>
-      <p>这扯不扯？</p>
+  <div class="home-layout">
+    <div class="main-container">
+      <div class="hero">
+        <h1 class="hero-title">Didiberber's Blog</h1>
+        <p class="hero-subtitle">这扯不扯你说</p>
+      </div>
+      
+      <div class="featured-articles">
+        <h2>最新文章</h2>
+        <div class="articles-grid">
+          <div 
+            v-for="article in latestArticles" 
+            :key="article.slug"
+            class="article-card"
+            @click="goToArticle(article.slug)"
+          >
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.excerpt }}</p>
+            <span class="date">{{ formatDate(article.date) }}</span>
+          </div>
+        </div>
+        
+        <div class="view-all-container">
+          <button class="btn btn-primary btn-with-icon" @click="goToAllArticles">
+            <span class="btn-icon">📚</span>
+            <span>查看更多</span>
+          </button>
+        </div>
+      </div>
     </div>
     
-    <div class="articles-list">
-      <article 
-        v-for="article in articles" 
-        :key="article.slug"
-        class="article-item"
-        @click="goToArticle(article.slug)"
-      >
-        <h3 class="article-title">{{ article.title }}</h3>
-        <p class="article-meta">
-          <span class="date">{{ formatDate(article.date) }}</span>
-          <span class="author">{{ article.author }}</span>
-        </p>
-        <p class="article-excerpt">{{ article.excerpt }}</p>
-      </article>
-    </div>
-    
-    <div v-if="articles.length === 0" class="no-articles">
-      <p>暂无文章，请在 pages/ 目录下添加 .md 文件</p>
-    </div>
+    <aside class="sidebar">
+      <AboutSidebar />
+    </aside>
   </div>
 </template>
 
 <script>
 import { getArticles } from '../utils/articles.js'
+import { formatDate } from '../utils/date.js'
+import AboutSidebar from './common/AboutSidebar.vue'
 
 export default {
   name: 'Home',
+  components: {
+    AboutSidebar
+  },
   data() {
     return {
-      articles: []
+      latestArticles: []
     }
   },
   mounted() {
-    this.articles = getArticles()
+    this.loadLatestArticles()
   },
   methods: {
-    goToArticle(slug) {
-      this.$router.push(`/article/${slug}`)
+    loadLatestArticles() {
+      try {
+        const articles = getArticles()
+        this.latestArticles = articles.slice(0, 3) // 只显示最新的3篇
+      } catch (error) {
+        console.error('加载最新文章失败:', error)
+      }
     },
-    formatDate(dateString) {
-      const date = new Date(dateString)
-      return date.toLocaleDateString('zh-CN', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      })
-    }
+    goToArticle(slug) {
+      // 只处理字符串类型的 slug，忽略事件对象
+      if (typeof slug === 'string') {
+        this.$router.push(`/article/${slug}`)
+      }
+    },
+    goToAllArticles() {
+      this.$router.push('/articles')
+    },
+    formatDate
   }
 }
 </script>
 
 <style scoped>
-.intro {
+.home-layout {
+  display: flex;
+  gap: var(--spacing-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+.main-container {
+  flex: 1;
+  max-width: 1000px;
+}
+
+.hero {
   text-align: center;
-  margin-bottom: 3rem;
-  padding: 2rem 0;
-  border-bottom: 1px solid #eee;
+  padding: var(--spacing-4xl) 0;
 }
 
-.intro h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #333;
+.hero-title {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
 }
 
-.intro p {
-  font-size: 1.1rem;
-  color: #666;
+.hero-subtitle {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-2xl);
 }
 
-.articles-list {
-  margin-top: 2rem;
+.featured-articles {
+  margin-top: var(--spacing-4xl);
 }
 
-.article-item {
-  padding: 1.5rem 0;
-  border-bottom: 1px solid #eee;
+.featured-articles h2 {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.article-card {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all var(--transition-normal);
 }
 
-.article-item:hover {
-  background-color: #f8f9fa;
-  margin: 0 -1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  border-radius: 8px;
+.article-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
 }
 
-.article-item:last-child {
-  border-bottom: none;
+.article-card:active {
+  transform: scale(0.98) translateY(-1px);
 }
 
-.article-title {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-  color: #333;
-  font-weight: 600;
+.article-card h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-md);
 }
 
-.article-meta {
-  margin-bottom: 1rem;
-  color: #888;
-  font-size: 0.9rem;
-}
-
-.article-meta .date {
-  margin-right: 1rem;
-}
-
-.article-meta .author::before {
-  content: '作者: ';
-}
-
-.article-excerpt {
-  color: #666;
+.article-card p {
+  color: var(--color-text-secondary);
   line-height: 1.6;
-  font-size: 1rem;
+  margin-bottom: var(--spacing-md);
 }
 
-.no-articles {
+.article-card .date {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.view-all-container {
   text-align: center;
-  color: #888;
-  padding: 3rem 0;
+  margin-top: var(--spacing-2xl);
 }
 
-.no-articles p {
-  font-size: 1.1rem;
+
+
+.sidebar {
+  width: 300px;
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  position: sticky;
+  top: var(--spacing-2xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border-primary);
+  height: fit-content;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .home-layout {
+    flex-direction: column;
+  }
+  
+  .hero-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .articles-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar {
+    width: 100%;
+    position: static;
+  }
 }
 </style>

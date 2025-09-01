@@ -1,0 +1,374 @@
+/* Article.vue 组件特有样式 */
+
+.article-layout {
+  display: flex;
+  gap: var(--spacing-2xl);
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+.main-container {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.article {
+  background-color: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border-primary);
+}
+
+.article-header {
+  margin-bottom: var(--spacing-3xl);
+  padding-bottom: var(--spacing-2xl);
+  border-bottom: 2px solid var(--color-border-primary);
+}
+
+.article-title {
+  font-size: var(--font-size-5xl);
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: -0.02em;
+}
+
+.article-meta {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-base);
+  display: flex;
+  gap: var(--spacing-xl);
+}
+
+.article-meta .date {
+  font-weight: var(--font-weight-medium);
+}
+
+.article-meta .author::before {
+  content: '作者: ';
+}
+
+.article-body {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-primary);
+  letter-spacing: 0.01em;
+}
+
+/* 优化的Markdown样式 */
+.article-body h1,
+.article-body h2,
+.article-body h3,
+.article-body h4,
+.article-body h5,
+.article-body h6 {
+  margin-top: var(--spacing-3xl);
+  margin-bottom: var(--spacing-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+  scroll-margin-top: 100px;
+}
+
+.article-body h1 {
+  font-size: var(--font-size-4xl);
+  border-bottom: 3px solid var(--color-primary);
+  padding-bottom: var(--spacing-md);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.article-body h2 {
+  font-size: var(--font-size-3xl);
+  border-bottom: 2px solid var(--color-border-primary);
+  padding-bottom: var(--spacing-sm);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.article-body h3 {
+  font-size: var(--font-size-2xl);
+  color: var(--color-primary);
+}
+
+.article-body h4 {
+  font-size: var(--font-size-xl);
+  color: var(--color-text-secondary);
+}
+
+.article-body h5,
+.article-body h6 {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-muted);
+}
+
+.article-body p {
+  margin-bottom: var(--spacing-lg);
+  text-align: justify;
+  line-height: var(--line-height-relaxed);
+}
+
+.article-body a {
+  color: var(--color-primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-normal);
+  font-weight: var(--font-weight-medium);
+}
+
+.article-body a:hover {
+  border-bottom-color: var(--color-primary);
+  color: var(--color-primary-hover);
+}
+
+.article-body ul,
+.article-body ol {
+  margin-bottom: var(--spacing-lg);
+  padding-left: var(--spacing-2xl);
+}
+
+.article-body li {
+  margin-bottom: var(--spacing-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+.article-body code {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.875em;
+  font-family: var(--font-family-mono);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--color-border-primary);
+}
+
+/* 代码块样式 */
+.code-block-wrapper {
+  position: relative;
+  margin: var(--spacing-2xl) 0;
+}
+
+.copy-button {
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-normal);
+  z-index: 10;
+  min-width: 40px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  display: block !important;
+}
+
+.copy-button:hover {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  transform: scale(1.05);
+  box-shadow: var(--shadow-md);
+}
+
+.copy-button.copied {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+}
+
+/* 复制成功弹窗样式 */
+.copy-toast {
+  position: fixed;
+  background: var(--color-primary);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  z-index: 1000;
+  transform: translateX(-50%) translateY(-100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-lg);
+  pointer-events: none;
+}
+
+.copy-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-120%);
+}
+
+.language-label {
+  position: absolute;
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  background: var(--color-primary);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  z-index: 10;
+  display: none; /* 隐藏语言标签 */
+}
+
+.article-body pre {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  margin: 0;
+  overflow-x: auto;
+  border: 1px solid var(--color-border-primary);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.article-body pre code {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  padding: 0;
+  border-radius: 0;
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-normal);
+  box-shadow: none;
+  border: none;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.article-body blockquote {
+  border-left: 4px solid var(--color-primary);
+  padding-left: var(--spacing-lg);
+  margin: var(--spacing-2xl) 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+  background-color: var(--color-bg-secondary);
+  padding: var(--spacing-lg) var(--spacing-lg) var(--spacing-lg) var(--spacing-xl);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  box-shadow: var(--shadow-sm);
+  font-size: var(--font-size-base);
+}
+
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-xl) 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.article-body th,
+.article-body td {
+  border: 1px solid var(--color-border-secondary);
+  padding: var(--spacing-md);
+  text-align: left;
+}
+
+.article-body th {
+  background-color: var(--color-bg-secondary);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+.article-body tr:nth-child(even) {
+  background-color: var(--color-bg-secondary);
+}
+
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  margin: var(--spacing-base) 0;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.article-footer {
+  margin-top: var(--spacing-3xl);
+  padding-top: var(--spacing-2xl);
+  border-top: 1px solid var(--color-border-primary);
+}
+
+.back-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.back-link:hover {
+  color: var(--color-primary-hover);
+  transform: translateX(-4px);
+}
+
+/* 侧栏样式 */
+.sidebar {
+  width: 300px;
+  position: sticky;
+  top: var(--spacing-2xl);
+  height: fit-content;
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  border: 1px solid var(--color-border-primary);
+  box-shadow: var(--shadow-md);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .article-layout {
+    flex-direction: column;
+    max-width: var(--container-max-width-wide);
+    padding: 0 var(--spacing-lg);
+  }
+  
+  .sidebar {
+    width: 100%;
+    position: static;
+  }
+  
+  .article {
+    padding: var(--spacing-xl);
+  }
+  
+  .article-title {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .article-body {
+    font-size: var(--font-size-base);
+  }
+  
+  .article-body h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .article-body h2 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .article-body h3 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .copy-button {
+    padding: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+  }
+  
+  .language-label {
+    padding: var(--spacing-xs);
+    font-size: var(--font-size-xs);
+  }
+}

@@ -1,0 +1,372 @@
+/* 公共样式 - 提取自各组件 */
+
+/* 文章卡片样式 */
+.article-item {
+  padding: var(--spacing-2xl) 0;
+  border-bottom: 1px solid var(--color-border-primary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  border-radius: var(--radius-lg);
+  margin: 0 calc(-1 * var(--spacing-base));
+  padding-left: var(--spacing-base);
+  padding-right: var(--spacing-base);
+}
+
+.article-item:hover {
+  background-color: var(--color-bg-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.article-item:last-child {
+  border-bottom: none;
+}
+
+/* 文章标题样式 */
+.article-title {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: -0.01em;
+  line-height: var(--line-height-tight);
+}
+
+/* 文章元信息样式 */
+.article-meta {
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.article-meta .date {
+  margin-right: var(--spacing-lg);
+}
+
+.article-meta .author::before {
+  content: '作者: ';
+}
+
+/* 文章摘要样式 */
+.article-excerpt {
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  font-size: var(--font-size-base);
+}
+
+/* 页面标题样式 */
+.page-title,
+.section-title {
+  font-size: var(--font-size-5xl);
+  margin-bottom: var(--spacing-3xl);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+  border-bottom: 2px solid var(--color-primary);
+  padding-bottom: var(--spacing-md);
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--spacing-2xl);
+}
+
+/* 统一按钮样式 - 基于关于页面社交链接样式 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--color-text-primary);
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+}
+
+.btn:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-primary {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-outline {
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* 带图标的按钮 */
+.btn-with-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.btn-icon {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+/* 通用点击动画效果 */
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn:active:hover {
+  transform: scale(0.95);
+}
+
+/* 链接样式 */
+.link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-normal);
+}
+
+.link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+/* 卡片样式 */
+.card {
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border-primary);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* 空状态样式 */
+.empty-state {
+  text-align: center;
+  color: var(--color-text-light);
+  padding: var(--spacing-4xl) 0;
+}
+
+.empty-state p {
+  font-size: var(--font-size-base);
+}
+
+/* 响应式工具类 */
+.container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-base);
+}
+
+.container-wide {
+  max-width: var(--container-max-width-wide);
+}
+
+/* 布局工具类 */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-base);
+}
+
+.gap-lg {
+  gap: var(--spacing-xl);
+}
+
+.gap-xl {
+  gap: var(--spacing-2xl);
+}
+
+/* 间距工具类 */
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-base); }
+.mt-lg { margin-top: var(--spacing-xl); }
+.mt-xl { margin-top: var(--spacing-2xl); }
+.mt-2xl { margin-top: var(--spacing-3xl); }
+
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-base); }
+.mb-lg { margin-bottom: var(--spacing-xl); }
+.mb-xl { margin-bottom: var(--spacing-2xl); }
+.mb-2xl { margin-bottom: var(--spacing-3xl); }
+
+.pt-sm { padding-top: var(--spacing-sm); }
+.pt-md { padding-top: var(--spacing-base); }
+.pt-lg { padding-top: var(--spacing-xl); }
+.pt-xl { padding-top: var(--spacing-2xl); }
+
+.pb-sm { padding-bottom: var(--spacing-sm); }
+.pb-md { padding-bottom: var(--spacing-base); }
+.pb-lg { padding-bottom: var(--spacing-xl); }
+.pb-xl { padding-bottom: var(--spacing-2xl); }
+
+/* 文本工具类 */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-primary { color: var(--color-text-primary); }
+.text-secondary { color: var(--color-text-secondary); }
+.text-muted { color: var(--color-text-muted); }
+.text-light { color: var(--color-text-light); }
+
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-base);
+  }
+  
+  .page-title {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .article-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .btn {
+    padding: var(--spacing-xs) var(--spacing-lg);
+    font-size: var(--font-size-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  .page-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .section-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .article-title {
+    font-size: var(--font-size-lg);
+  }
+  
+  .card {
+    padding: var(--spacing-xl);
+  }
+}
+
+/* 暗色主题样式覆盖 */
+[data-theme="dark"] .article-item {
+  border-bottom-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .article-item:hover {
+  background-color: var(--color-bg-hover);
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="dark"] .article-title {
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .article-meta {
+  color: var(--color-text-muted);
+}
+
+[data-theme="dark"] .article-excerpt {
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .page-title,
+[data-theme="dark"] .section-title {
+  color: var(--color-text-primary);
+  border-bottom-color: var(--color-primary-light);
+}
+
+[data-theme="dark"] .btn-outline {
+  color: var(--color-primary-light);
+  border-color: var(--color-primary-light);
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .link {
+  color: var(--color-primary-light);
+}
+
+[data-theme="dark"] .link:hover {
+  color: var(--color-primary-lighter);
+}
+
+[data-theme="dark"] .card {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .empty-state {
+  color: var(--color-text-light);
+}

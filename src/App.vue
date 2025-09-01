@@ -1,30 +1,58 @@
 <template>
-  <div id="app">
-    <header class="header">
-      <div class="container">
-        <h1 class="logo">
-          <router-link to="/">Didiberber</router-link>
-        </h1>
-      </div>
-    </header>
+  <div id="app" :data-theme="isDarkTheme ? 'dark' : 'light'">
+    <Header @theme-change="handleThemeChange" />
     
     <main class="main">
-      <div class="container">
-        <router-view />
-      </div>
+      <router-view />
     </main>
     
     <footer class="footer">
-      <div class="container">
-        <p>&copy; 2024 GBlog. 极简博客系统</p>
+      <div class="header-container">
+        <p>&copy; 2024 Blog. Didiberber</p>
       </div>
     </footer>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
+import Header from './components/layout/Header.vue'
 
+export default {
+  name: 'App',
+  components: {
+    Header
+  },
+  data() {
+    return {
+      isDarkTheme: false
+    }
+  },
+  methods: {
+    handleThemeChange(theme) {
+      this.isDarkTheme = theme === 'dark'
+    }
+  }
 }
 </script>
+
+<style scoped>
+/* App.vue 特定样式 */
+.main {
+  min-height: calc(100vh - 120px); /* 减去header和footer的高度 */
+  padding: var(--spacing-2xl) 0;
+}
+
+.footer {
+  background-color: var(--color-bg-secondary);
+  border-top: 1px solid var(--color-border-primary);
+  padding: var(--spacing-xl) 0;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.header-container {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+</style>

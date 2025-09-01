@@ -1,9 +1,7 @@
+import { APP_CONFIG } from '../config/constants.js'
+
 // 自动导入 pages 目录下的所有 markdown 文件
-const modules = import.meta.glob('../pages/*.md', { 
-  eager: true, 
-  query: '?raw',
-  import: 'default'
-})
+const modules = import.meta.glob('../pages/*.md', { eager: true, query: '?raw', import: 'default' })
 
 // 解析 markdown 文件的 frontmatter
 function parseFrontmatter(content) {
@@ -36,7 +34,7 @@ function parseFrontmatter(content) {
 }
 
 // 获取文章摘要
-function getExcerpt(content, maxLength = 150) {
+function getExcerpt(content, maxLength = APP_CONFIG.ARTICLE.DEFAULT_EXCERPT_LENGTH) {
   // 移除 markdown 标记
   const plainText = content
     .replace(/#{1,6}\s+/g, '') // 移除标题标记
@@ -63,6 +61,11 @@ export function getArticles() {
   
   for (const path in modules) {
     const content = modules[path]
+    
+    if (!content || typeof content !== 'string') {
+      continue
+    }
+    
     const { metadata, content: body } = parseFrontmatter(content)
     const slug = getSlugFromPath(path)
     
@@ -70,7 +73,7 @@ export function getArticles() {
       slug,
       title: metadata.title || slug,
       date: metadata.date || new Date().toISOString().split('T')[0],
-      author: metadata.author || 'Anonymous',
+      author: metadata.author || APP_CONFIG.ARTICLE.DEFAULT_AUTHOR,
       excerpt: getExcerpt(body),
       content: body,
       metadata
@@ -85,4 +88,23 @@ export function getArticles() {
 export function getArticleBySlug(slug) {
   const articles = getArticles()
   return articles.find(article => article.slug === slug)
+}
+
+// 获取文章统计信息
+export function getArticlesStats() {
+  const articles = getArticles()
+  const totalArticles = articles.length
+  
+  // 按年份统计
+  const yearStats = {}
+  articles.forEach(article => {
+    const year = new Date(article.date).getFullYear()
+    yearStats[year] = (yearStats[year] || 0) + 1
+  })
+  
+  return {
+    total: totalArticles,
+    byYear: yearStats,
+    latest: articles[0] || null
+  }
 }
