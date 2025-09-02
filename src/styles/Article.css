@@ -6,6 +6,8 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--spacing-xl);
+  /* 添加顶部边距，避免被固定导航栏遮挡 */
+  margin-top: var(--header-height);
 }
 
 .main-container {
@@ -71,7 +73,9 @@
   line-height: var(--line-height-tight);
   color: var(--color-text-primary);
   letter-spacing: -0.02em;
-  scroll-margin-top: 100px;
+  /* 使用CSS变量设置滚动边距，确保导航栏不遮挡内容 */
+  scroll-margin-top: var(--scroll-offset);
+  scroll-padding-top: var(--scroll-offset);
 }
 
 .article-body h1 {
@@ -476,6 +480,8 @@
     flex-direction: column;
     max-width: var(--container-max-width-wide);
     padding: 0 var(--spacing-lg);
+    /* 移动端使用较小的顶部边距 */
+    margin-top: var(--header-height-mobile);
   }
   
   .sidebar {
@@ -549,5 +555,16 @@
   .language-label {
     padding: var(--spacing-xs);
     font-size: var(--font-size-xs);
+  }
+  
+  /* 移动端滚动边距调整 */
+  .article-body h1,
+  .article-body h2,
+  .article-body h3,
+  .article-body h4,
+  .article-body h5,
+  .article-body h6 {
+    scroll-margin-top: var(--scroll-offset-mobile);
+    scroll-padding-top: var(--scroll-offset-mobile);
   }
 }

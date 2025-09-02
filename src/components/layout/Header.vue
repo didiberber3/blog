@@ -40,6 +40,7 @@ export default {
   z-index: 100;
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow-sm);
+  height: var(--header-height);
 }
 
 .header-container {
@@ -49,7 +50,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
+  height: 100%;
   gap: var(--spacing-lg);
 }
 

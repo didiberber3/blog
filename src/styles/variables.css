@@ -94,6 +94,12 @@
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1200px;
   
+  /* 导航栏尺寸 */
+  --header-height: 60px;
+  --header-height-mobile: 56px;
+  --scroll-offset: calc(var(--header-height) + var(--spacing-lg));
+  --scroll-offset-mobile: calc(var(--header-height-mobile) + var(--spacing-md));
+  
   /* 滚动条样式变量 */
   --scrollbar-width: 8px;
   --scrollbar-track-color: var(--color-bg-secondary);

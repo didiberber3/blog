@@ -6,6 +6,8 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--spacing-xl);
+  /* 添加顶部边距，避免被固定导航栏遮挡 */
+  margin-top: var(--header-height);
 }
 
 .main-container {
@@ -155,23 +157,37 @@
     flex-direction: column;
     max-width: var(--container-max-width-wide);
     padding: 0 var(--spacing-lg);
+    /* 移动端使用较小的顶部边距 */
+    margin-top: var(--header-height-mobile);
   }
   
   .sidebar {
     width: 100%;
     position: static;
+    top: auto;
+  }
+  
+  .sidebar-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .date-header {
+    font-size: var(--font-size-lg);
+  }
+  
+  .date-article {
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
   }
   
   .pagination {
-    flex-direction: column;
-    gap: var(--spacing-lg);
-  }
-  
-  .page-numbers {
-    order: -1;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
   }
   
   .pagination-btn {
-    min-width: 120px;
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: var(--font-size-xs);
+    min-width: 60px;
   }
 }

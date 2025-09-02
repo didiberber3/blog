@@ -6,6 +6,8 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 var(--spacing-xl);
+  /* 添加顶部边距，避免被固定导航栏遮挡 */
+  margin-top: var(--header-height);
 }
 
 .main-container {
@@ -178,19 +180,27 @@
     flex-direction: column;
     max-width: var(--container-max-width-wide);
     padding: 0 var(--spacing-lg);
+    /* 移动端使用较小的顶部边距 */
+    margin-top: var(--header-height-mobile);
   }
   
   .sidebar {
     width: 100%;
     position: static;
+    top: auto;
   }
   
   .intro h2 {
-    font-size: var(--font-size-6xl);
+    font-size: var(--font-size-5xl);
   }
   
   .intro p {
     font-size: var(--font-size-xl);
+  }
+  
+  .view-all-btn {
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--font-size-sm);
   }
 }
 
