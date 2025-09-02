@@ -53,36 +53,12 @@
           </div>
           
           <div class="footer-section">
-            <h3>📚 项目特性</h3>
-            <ul class="features">
-              <li>🎨 主题切换 (浅色/深色/自动)</li>
-              <li>📱 响应式设计</li>
-              <li>🔍 文章搜索</li>
-              <li>📚 目录导航</li>
-              <li>⚡ 性能优化</li>
-              <li>🔌 插件系统</li>
-              <li>📝 Markdown支持</li>
-              <li>🎯 SEO友好</li>
-            </ul>
-          </div>
-          
-          <div class="footer-section">
             <h3>🔗 快速链接</h3>
             <div class="quick-links">
               <a href="/about" class="quick-link">关于博客</a>
               <a href="/articles" class="quick-link">所有文章</a>
               <a href="https://github.com/didiberber3" target="_blank" class="quick-link">GitHub</a>
               <a href="https://space.bilibili.com/487735502" target="_blank" class="quick-link">哔哩哔哩</a>
-            </div>
-          </div>
-          
-          <div class="footer-section">
-            <h3>📖 关于项目</h3>
-            <p>这是一个现代化的博客系统，采用模块化架构设计，具有良好的扩展性和维护性。基于Vue 3生态系统构建，支持Markdown写作，具备完整的主题切换和响应式设计。</p>
-            <div class="project-links">
-              <a href="https://github.com/didiberber3/gblog" target="_blank" class="project-link">源码仓库</a>
-              <a href="/about" class="project-link">项目文档</a>
-              <a href="/docs/CHANGELOG.md" class="project-link">更新日志</a>
             </div>
           </div>
         </div>
