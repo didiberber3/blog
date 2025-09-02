@@ -44,12 +44,12 @@
       <!-- 主导航区域 -->
       <nav class="nav">
         <!-- 菜单按钮 -->
-        <div class="menu-container">
-          <button 
-            class="menu-trigger"
-            @mouseenter="showMenu = true"
-            @mouseleave="handleMenuLeave"
-          >
+        <div 
+          class="menu-container"
+          @mouseenter="showMenu = true"
+          @mouseleave="handleMenuLeave"
+        >
+          <button class="menu-trigger">
             <span class="menu-icon">☰</span>
             <span class="menu-text">菜单</span>
           </button>
@@ -58,8 +58,6 @@
           <div 
             class="submenu"
             :class="{ 'submenu-visible': showMenu }"
-            @mouseenter="showMenu = true"
-            @mouseleave="handleMenuLeave"
           >
             <router-link to="/" class="submenu-item">
               <span class="submenu-icon">🏠</span>
@@ -135,7 +133,7 @@ export default {
       // 延迟隐藏菜单，给用户时间移动到子菜单
       this.menuTimeout = setTimeout(() => {
         this.showMenu = false
-      }, 150)
+      }, 200)
     },
     
     generateHeadings() {
@@ -361,9 +359,11 @@ export default {
   flex-shrink: 0;
 }
 
-/* 菜单容器 */
+/* 菜单容器 - 关键修复：整个容器作为悬停区域 */
 .menu-container {
   position: relative;
+  /* 确保悬停区域连续 */
+  padding-bottom: var(--spacing-sm);
 }
 
 .menu-trigger {
@@ -378,6 +378,8 @@ export default {
   font-weight: var(--font-weight-medium);
   cursor: pointer;
   transition: all var(--transition-normal);
+  /* 确保按钮不会阻止悬停 */
+  pointer-events: none;
 }
 
 .menu-trigger:hover {
@@ -396,10 +398,10 @@ export default {
   font-size: var(--font-size-sm);
 }
 
-/* 二级菜单 - 使用与关于页面一致的样式 */
+/* 二级菜单 - 修复定位和悬停区域 */
 .submenu {
   position: absolute;
-  top: 100%;
+  top: calc(100% - var(--spacing-sm)); /* 减少间隙 */
   right: 0;
   background: var(--color-bg-primary);
   border: 1px solid var(--color-border-primary);
@@ -411,8 +413,9 @@ export default {
   transform: translateY(-10px);
   transition: all var(--transition-normal);
   z-index: 1000;
-  margin-top: var(--spacing-xs);
   padding: var(--spacing-sm);
+  /* 确保悬停区域连续 */
+  pointer-events: auto;
 }
 
 .submenu-visible {
