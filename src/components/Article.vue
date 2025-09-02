@@ -14,7 +14,43 @@
           <div class="article-body" v-html="renderedContent" ref="articleBody"></div>
           
           <footer class="article-footer">
-            <router-link to="/" class="back-link">← 返回首页</router-link>
+            <div class="article-meta">
+              <div class="meta-item">
+                <span class="meta-label">📅 发布时间:</span>
+                <span class="meta-value">{{ formatDate(article.date) }}</span>
+              </div>
+              <div class="meta-item" v-if="article.tags && article.tags.length">
+                <span class="meta-label">🏷️ 标签:</span>
+                <div class="tags">
+                  <span 
+                    v-for="tag in article.tags" 
+                    :key="tag" 
+                    class="tag"
+                  >
+                    {{ tag }}
+                  </span>
+                </div>
+              </div>
+              <div class="meta-item" v-if="article.category">
+                <span class="meta-label">📂 分类:</span>
+                <span class="meta-value">{{ article.category }}</span>
+              </div>
+            </div>
+            
+            <div class="article-actions">
+              <router-link to="/" class="back-link">← 返回首页</router-link>
+              <button 
+                @click="scrollToTop" 
+                class="scroll-top-btn"
+                title="回到顶部"
+              >
+                ↑ 回到顶部
+              </button>
+            </div>
+            
+            <div class="article-navigation">
+              <p class="navigation-hint">💡 提示: 使用右侧目录快速导航到文章的不同部分</p>
+            </div>
           </footer>
         </div>
         
@@ -350,6 +386,30 @@ export default {
           }
         }, 300)
       }, 1500)
+    },
+    
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })
+    },
+    
+    formatDate(dateString) {
+      if (!dateString) return '未知时间'
+      
+      try {
+        const date = new Date(dateString)
+        if (isNaN(date.getTime())) return '未知时间'
+        
+        const year = date.getFullYear()
+        const month = String(date.getMonth() + 1).padStart(2, '0')
+        const day = String(date.getDate()).padStart(2, '0')
+        
+        return `${year}年${month}月${day}日`
+      } catch (error) {
+        return '未知时间'
+      }
     }
   },
   
