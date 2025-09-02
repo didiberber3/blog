@@ -27,7 +27,11 @@
     </div>
     
     <aside class="sidebar">
-      <TableOfContents :toc="toc" />
+      <!-- 侧栏内容可以保留，但不再显示目录 -->
+      <div class="sidebar-content">
+        <h3>相关文章</h3>
+        <p>这里可以显示相关文章推荐</p>
+      </div>
     </aside>
   </div>
 </template>
@@ -36,7 +40,6 @@
 import { getArticleBySlug } from '../utils/articles.js'
 import { generateTableOfContents } from '../utils/toc.js'
 import MarkdownIt from 'markdown-it'
-import TableOfContents from './TableOfContents.vue'
 
 const md = new MarkdownIt({
   html: true,
@@ -46,9 +49,6 @@ const md = new MarkdownIt({
 
 export default {
   name: 'Article',
-  components: {
-    TableOfContents
-  },
   props: ['slug'],
   data() {
     return {
@@ -74,6 +74,8 @@ export default {
         this.$nextTick(() => {
           this.generateToc()
           this.setupCodeBlocks()
+          // 触发content-update事件，通知父组件更新目录
+          this.$emit('content-update', this.article ? this.article.content : '')
         })
       },
       immediate: true
@@ -82,6 +84,10 @@ export default {
   methods: {
     loadArticle() {
       this.article = getArticleBySlug(this.slug)
+      // 文章加载后立即触发content-update事件
+      if (this.article) {
+        this.$emit('content-update', this.article.content)
+      }
     },
     formatDate(dateString) {
       const date = new Date(dateString)
@@ -235,6 +241,8 @@ export default {
         button.innerHTML = '✅'
         button.title = '已复制'
         button.classList.add('copied')
+        
+        this.showCopyToast(event)
         
         this.showCopyToast(event)
         
