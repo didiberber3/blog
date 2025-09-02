@@ -242,6 +242,90 @@ body {
   color: var(--color-primary);
 }
 
+/* 部署信息样式 */
+.deployment-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.deploy-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-primary);
+}
+
+.deploy-icon {
+  font-size: var(--font-size-lg);
+  min-width: 24px;
+}
+
+.deploy-label {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  min-width: 80px;
+}
+
+.deploy-value {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.deploy-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-normal);
+}
+
+.deploy-link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.deploy-code {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: var(--font-size-xs);
+  border: 1px solid var(--color-border-primary);
+}
+
+/* 快速链接样式 */
+.quick-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.quick-link {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+  text-align: center;
+}
+
+.quick-link:hover {
+  background-color: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
 .project-links {
   display: flex;
   gap: var(--spacing-md);
@@ -283,6 +367,13 @@ body {
   opacity: 0.7;
 }
 
+.tech-credits {
+  color: var(--color-text-light) !important;
+  font-size: var(--font-size-xs) !important;
+  opacity: 0.6;
+  font-style: italic;
+}
+
 /* 页脚响应式设计 */
 @media (max-width: 768px) {
   .footer-content {
@@ -293,6 +384,24 @@ body {
   .project-links {
     flex-direction: column;
     align-items: center;
+  }
+  
+  .deployment-info {
+    gap: var(--spacing-sm);
+  }
+  
+  .deploy-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+  
+  .deploy-label {
+    min-width: auto;
+  }
+  
+  .quick-links {
+    gap: var(--spacing-xs);
   }
 }
 
@@ -627,6 +736,26 @@ body {
   background-color: var(--color-bg-secondary);
   border-top-color: var(--color-border-primary);
   color: var(--color-text-light);
+}
+
+[data-theme="dark"] .deploy-item {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .deploy-code {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .quick-link {
+  border-color: var(--color-border-primary);
+}
+
+[data-theme="dark"] .quick-link:hover {
+  background-color: var(--color-primary-light);
+  border-color: var(--color-primary-light);
 }
 
 [data-theme="dark"] .article-body {
