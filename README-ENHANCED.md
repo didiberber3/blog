@@ -1,8 +1,16 @@
-# GBlog - 极简静态博客系统
+# 🚀 GBlog - 极简静态博客系统
+
+[![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-the-badge&logo=vue.js)](https://vuejs.org/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Deployed-blue?style=for-the-badge&logo=github)](https://didiberber3.github.io/blog/)
 
 基于 Vue3 + Vite 构建的极简静态博客系统，支持 GitHub Pages 部署。
 
 ## 📑 目录导航
+
+<details>
+<summary>📋 展开目录</summary>
 
 - [✨ 特性](#-特性)
 - [🚀 快速开始](#-快速开始)
@@ -26,6 +34,8 @@
 - [📄 许可证](#-许可证)
 - [🤝 贡献](#-贡献)
 
+</details>
+
 ---
 
 ## ✨ 特性
@@ -42,8 +52,8 @@
 ### 1. 克隆项目
 
 ```bash
-git clone <your-repo-url>
-cd gblog
+git clone https://github.com/didiberber3/blog.git
+cd blog
 ```
 
 ### 2. 安装依赖
@@ -186,3 +196,13 @@ MIT License
 ## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request！
+
+---
+
+<div align="center">
+
+**如果这个项目对你有帮助，请给它一个 ⭐️**
+
+[![GitHub stars](https://img.shields.io/github/stars/didiberber3/blog?style=social)](https://github.com/didiberber3/blog)
+
+</div>
