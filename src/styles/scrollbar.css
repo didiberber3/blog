@@ -1,0 +1,172 @@
+/* 滚动条样式系统 - 符合主题CSS规范 */
+
+/* 基础滚动条样式 */
+.scrollbar-base {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
+
+.scrollbar-base::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+}
+
+.scrollbar-base::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-color);
+  border-radius: var(--scrollbar-border-radius);
+  box-shadow: var(--scrollbar-shadow);
+}
+
+.scrollbar-base::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: var(--scrollbar-border-radius);
+  transition: background-color var(--transition-fast);
+}
+
+.scrollbar-base::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover-color);
+}
+
+.scrollbar-base::-webkit-scrollbar-thumb:active {
+  background-color: var(--scrollbar-thumb-active-color);
+}
+
+.scrollbar-base::-webkit-scrollbar-corner {
+  background-color: var(--scrollbar-track-color);
+}
+
+/* 细滚动条 */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* 隐藏滚动条 */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* 自定义宽度滚动条 */
+.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
+
+.scrollbar-custom::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+}
+
+.scrollbar-custom::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-color);
+  border-radius: var(--scrollbar-border-radius);
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: var(--scrollbar-border-radius);
+  transition: background-color var(--transition-fast);
+}
+
+.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover-color);
+}
+
+/* 水平滚动条 */
+.scrollbar-horizontal {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.scrollbar-horizontal::-webkit-scrollbar {
+  height: var(--scrollbar-width);
+  width: auto;
+}
+
+/* 垂直滚动条 */
+.scrollbar-vertical {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.scrollbar-vertical::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: auto;
+}
+
+/* 圆角滚动条 */
+.scrollbar-rounded::-webkit-scrollbar-thumb {
+  border-radius: var(--radius-full);
+}
+
+.scrollbar-rounded::-webkit-scrollbar-track {
+  border-radius: var(--radius-full);
+}
+
+/* 阴影滚动条 */
+.scrollbar-shadow::-webkit-scrollbar-thumb {
+  box-shadow: var(--scrollbar-shadow);
+}
+
+/* 响应式滚动条 */
+@media (max-width: 768px) {
+  .scrollbar-responsive {
+    --scrollbar-width: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scrollbar-responsive {
+    --scrollbar-width: 4px;
+  }
+}
+
+/* 特定组件的滚动条样式 */
+.toc-nav.scrollbar-custom,
+.mobile-menu.scrollbar-custom,
+.sidebar-content.scrollbar-custom {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
+
+.toc-nav.scrollbar-custom::-webkit-scrollbar,
+.mobile-menu.scrollbar-custom::-webkit-scrollbar,
+.sidebar-content.scrollbar-custom::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+.toc-nav.scrollbar-custom::-webkit-scrollbar-track,
+.mobile-menu.scrollbar-custom::-webkit-scrollbar-track,
+.sidebar-content.scrollbar-custom::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-color);
+  border-radius: var(--scrollbar-border-radius);
+}
+
+.toc-nav.scrollbar-custom::-webkit-scrollbar-thumb,
+.mobile-menu.scrollbar-custom::-webkit-scrollbar-thumb,
+.sidebar-content.scrollbar-custom::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: var(--scrollbar-border-radius);
+  transition: background-color var(--transition-fast);
+}
+
+.toc-nav.scrollbar-custom::-webkit-scrollbar-thumb:hover,
+.mobile-menu.scrollbar-custom::-webkit-scrollbar-thumb:hover,
+.sidebar-content.scrollbar-custom::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover-color);
+}
+
+.toc-nav.scrollbar-custom::-webkit-scrollbar-thumb:active,
+.mobile-menu.scrollbar-custom::-webkit-scrollbar-thumb:active,
+.sidebar-content.scrollbar-custom::-webkit-scrollbar-thumb:active {
+  background-color: var(--scrollbar-thumb-active-color);
+}

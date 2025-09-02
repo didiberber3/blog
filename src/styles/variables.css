@@ -93,6 +93,15 @@
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1200px;
+  
+  /* 滚动条样式变量 */
+  --scrollbar-width: 8px;
+  --scrollbar-track-color: var(--color-bg-secondary);
+  --scrollbar-thumb-color: var(--color-border-secondary);
+  --scrollbar-thumb-hover-color: var(--color-text-muted);
+  --scrollbar-thumb-active-color: var(--color-primary);
+  --scrollbar-border-radius: var(--radius-sm);
+  --scrollbar-shadow: var(--shadow-sm);
 }
 
 /* 暗色主题变量 */
@@ -115,4 +124,10 @@
   --shadow-lg: 0 8px 20px rgba(0, 0, 0, 0.3);
   --shadow-primary: 0 4px 16px rgba(129, 199, 132, 0.4);
   --shadow-primary-hover: 0 6px 20px rgba(129, 199, 132, 0.5);
+  
+  /* 暗色主题滚动条变量 */
+  --scrollbar-track-color: var(--color-bg-tertiary);
+  --scrollbar-thumb-color: var(--color-border-primary);
+  --scrollbar-thumb-hover-color: var(--color-text-secondary);
+  --scrollbar-thumb-active-color: var(--color-primary-light);
 }

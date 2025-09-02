@@ -197,6 +197,33 @@ export default {
   overflow-y: auto;
   width: 100%;
   height: 100vh;
+  /* 使用新的滚动条样式类 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
+}
+
+/* 为移动端菜单添加专门的滚动条样式 */
+.mobile-menu::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+}
+
+.mobile-menu::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-color);
+  border-radius: var(--scrollbar-border-radius);
+}
+
+.mobile-menu::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color);
+  border-radius: var(--scrollbar-border-radius);
+  transition: background-color var(--transition-fast);
+}
+
+.mobile-menu::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover-color);
+}
+
+.mobile-menu::-webkit-scrollbar-thumb:active {
+  background-color: var(--scrollbar-thumb-active-color);
 }
 
 .mobile-menu-open {

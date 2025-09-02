@@ -9,6 +9,9 @@
 /* 全局样式 */
 @import './global.css';
 
+/* 滚动条样式系统 */
+@import './scrollbar.css';
+
 /* 组件样式 */
 @import './Home.css';
 @import './AllArticles.css';
