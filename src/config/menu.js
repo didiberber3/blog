@@ -14,14 +14,54 @@ export const MENU_CONFIG = {
       text: '文章',
       icon: '📚',
       description: '浏览所有文章',
-      order: 2
+      order: 2,
+      submenu: [
+        {
+          path: '/articles',
+          text: '全部文章',
+          icon: '📖',
+          description: '浏览所有文章列表'
+        },
+        {
+          path: '/articles?tag=技术',
+          text: '技术文章',
+          icon: '💻',
+          description: '技术相关文章'
+        },
+        {
+          path: '/articles?tag=生活',
+          text: '生活感悟',
+          icon: '🌟',
+          description: '生活感悟文章'
+        },
+        {
+          path: '/articles?tag=教程',
+          text: '教程指南',
+          icon: '📝',
+          description: '学习教程和指南'
+        }
+      ]
     },
     {
       path: '/about',
       text: '关于',
       icon: 'ℹ️',
       description: '了解更多信息',
-      order: 3
+      order: 3,
+      submenu: [
+        {
+          path: '/about',
+          text: '关于博客',
+          icon: '📋',
+          description: '博客介绍和说明'
+        },
+        {
+          path: '/about-gblog',
+          text: '关于GBlog',
+          icon: '🔧',
+          description: 'GBlog系统介绍'
+        }
+      ]
     }
   ],
   
@@ -40,6 +80,20 @@ export const MENU_CONFIG = {
       icon: '🌟',
       description: '生活感悟文章',
       order: 2
+    },
+    {
+      path: '/articles?tag=教程',
+      text: '教程',
+      icon: '📝',
+      description: '学习教程和指南',
+      order: 3
+    },
+    {
+      path: '/menu-test-new',
+      text: '菜单测试',
+      icon: '🧪',
+      description: '测试菜单功能',
+      order: 4
     }
   ],
   
@@ -123,6 +177,14 @@ export function getBreadcrumbs(currentPath) {
       path: '/about',
       text: '关于',
       icon: 'ℹ️'
+    })
+  }
+  
+  if (currentPath.startsWith('/menu-test')) {
+    breadcrumbs.push({
+      path: currentPath,
+      text: '菜单测试',
+      icon: '🧪'
     })
   }
   
