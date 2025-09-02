@@ -48,7 +48,7 @@
           <button 
             class="menu-trigger"
             @mouseenter="showMenu = true"
-            @mouseleave="hideMenu"
+            @mouseleave="handleMenuLeave"
           >
             <span class="menu-icon">☰</span>
             <span class="menu-text">菜单</span>
@@ -59,7 +59,7 @@
             class="submenu"
             :class="{ 'submenu-visible': showMenu }"
             @mouseenter="showMenu = true"
-            @mouseleave="hideMenu"
+            @mouseleave="handleMenuLeave"
           >
             <router-link to="/" class="submenu-item">
               <span class="submenu-icon">🏠</span>
@@ -112,7 +112,8 @@ export default {
       isTocExpanded: false,
       headings: [],
       activeHeading: null,
-      observer: null
+      observer: null,
+      menuTimeout: null
     }
   },
   mounted() {
@@ -125,13 +126,16 @@ export default {
     if (this.observer) {
       this.observer.disconnect()
     }
+    if (this.menuTimeout) {
+      clearTimeout(this.menuTimeout)
+    }
   },
   methods: {
-    hideMenu() {
-      // 延迟隐藏，给用户时间移动到子菜单
-      setTimeout(() => {
+    handleMenuLeave() {
+      // 延迟隐藏菜单，给用户时间移动到子菜单
+      this.menuTimeout = setTimeout(() => {
         this.showMenu = false
-      }, 100)
+      }, 150)
     },
     
     generateHeadings() {
@@ -392,7 +396,7 @@ export default {
   font-size: var(--font-size-sm);
 }
 
-/* 二级菜单 */
+/* 二级菜单 - 使用与关于页面一致的样式 */
 .submenu {
   position: absolute;
   top: 100%;
@@ -401,13 +405,14 @@ export default {
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  min-width: 180px;
+  min-width: 200px;
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
   transition: all var(--transition-normal);
   z-index: 1000;
   margin-top: var(--spacing-xs);
+  padding: var(--spacing-sm);
 }
 
 .submenu-visible {
@@ -419,33 +424,42 @@ export default {
 .submenu-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
-  padding: var(--spacing-sm) var(--spacing-md);
-  color: var(--color-text-primary);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-lg);
   text-decoration: none;
+  color: var(--color-text-primary);
   transition: all var(--transition-normal);
-  border-bottom: 1px solid var(--color-border-primary);
+  border: 2px solid transparent;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-sm);
 }
 
 .submenu-item:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .submenu-item:hover {
-  background-color: var(--color-bg-hover);
-  color: var(--color-primary);
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.submenu-item:active {
+  transform: scale(0.95) translateY(-2px);
 }
 
 .submenu-icon {
-  font-size: var(--font-size-lg);
-  width: 20px;
-  text-align: center;
+  font-size: 1.75rem;
+  margin-right: var(--spacing-base);
+  width: auto;
 }
 
 .submenu-divider {
   height: 1px;
   background-color: var(--color-border-primary);
-  margin: var(--spacing-xs) 0;
+  margin: var(--spacing-sm) 0;
 }
 
 .theme-toggle-item {
@@ -487,7 +501,7 @@ export default {
   .submenu {
     right: auto;
     left: 0;
-    min-width: 200px;
+    min-width: 220px;
   }
 }
 
