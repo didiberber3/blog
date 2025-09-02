@@ -4,48 +4,49 @@
   </button>
 </template>
 
-<script>
-import { getStorageItem, setStorageItem, STORAGE_KEYS } from '../../utils/storage.js'
+<script setup>
+import { computed } from 'vue'
+import { useTheme } from '../../core/hooks/useTheme.js'
 
-export default {
-  name: 'ThemeToggle',
-  data() {
-    return {
-      isDarkTheme: false
-    }
-  },
-  computed: {
-    themeIcon() {
-      return this.isDarkTheme ? '☀️' : '🌙'
-    },
-    toggleTitle() {
-      return this.isDarkTheme ? '切换到浅色主题' : '切换到深色主题'
-    }
-  },
-  mounted() {
-    this.loadTheme()
-  },
-  methods: {
-    toggleTheme() {
-      this.isDarkTheme = !this.isDarkTheme
-      this.applyTheme()
-      this.saveTheme()
-      this.$emit('theme-change', this.isDarkTheme ? 'dark' : 'light')
-    },
+// 使用主题钩子
+const {
+  currentTheme,
+  isDarkTheme,
+  switchTheme,
+  nextTheme
+} = useTheme()
+
+// 计算属性
+const themeIcon = computed(() => {
+  return isDarkTheme.value ? '☀️' : '🌙'
+})
+
+const toggleTitle = computed(() => {
+  return isDarkTheme.value ? '切换到浅色主题' : '切换到深色主题'
+})
+
+// 方法
+const toggleTheme = async () => {
+  try {
+    const nextThemeValue = currentTheme.value === 'light' ? 'dark' : 'light'
+    const result = await switchTheme(nextThemeValue)
     
-    loadTheme() {
-      const savedTheme = getStorageItem(STORAGE_KEYS.THEME, 'light')
-      this.isDarkTheme = savedTheme === 'dark'
-      this.applyTheme()
-    },
-    
-    saveTheme() {
-      setStorageItem(STORAGE_KEYS.THEME, this.isDarkTheme ? 'dark' : 'light')
-    },
-    
-    applyTheme() {
-      document.documentElement.setAttribute('data-theme', this.isDarkTheme ? 'dark' : 'light')
+    if (result.success) {
+      console.log('主题切换成功:', result.theme)
+    } else {
+      console.error('主题切换失败:', result.error)
     }
+  } catch (error) {
+    console.error('主题切换出错:', error)
+  }
+}
+
+// 或者使用循环切换
+const cycleTheme = async () => {
+  try {
+    await nextTheme()
+  } catch (error) {
+    console.error('主题循环切换出错:', error)
   }
 }
 </script>
