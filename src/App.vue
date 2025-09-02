@@ -1,13 +1,9 @@
 <template>
   <div id="app" :data-theme="isDarkTheme ? 'dark' : 'light'">
-    <Header 
-      :show-toc="showToc" 
-      :content="currentContent"
-      @theme-change="handleThemeChange" 
-    />
+    <Header @theme-change="handleThemeChange" />
     
     <main class="main">
-      <router-view @content-update="handleContentUpdate" />
+      <router-view />
     </main>
     
     <footer class="footer">
@@ -28,24 +24,12 @@ export default {
   },
   data() {
     return {
-      isDarkTheme: false,
-      showToc: false,
-      currentContent: ''
-    }
-  },
-  watch: {
-    $route(to) {
-      // 只在文章页面显示目录
-      this.showToc = to.name === 'Article'
+      isDarkTheme: false
     }
   },
   methods: {
     handleThemeChange(theme) {
       this.isDarkTheme = theme === 'dark'
-    },
-    
-    handleContentUpdate(content) {
-      this.currentContent = content
     }
   }
 }

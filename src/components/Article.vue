@@ -11,6 +11,9 @@
             </div>
           </header>
           
+          <!-- 文章目录导航 -->
+          <ArticleToc :content="article.content" />
+          
           <div class="article-body" v-html="renderedContent" ref="articleBody"></div>
           
           <footer class="article-footer">
@@ -40,6 +43,7 @@
 import { getArticleBySlug } from '../utils/articles.js'
 import { generateTableOfContents } from '../utils/toc.js'
 import MarkdownIt from 'markdown-it'
+import ArticleToc from './common/ArticleToc.vue'
 
 const md = new MarkdownIt({
   html: true,
@@ -49,6 +53,9 @@ const md = new MarkdownIt({
 
 export default {
   name: 'Article',
+  components: {
+    ArticleToc
+  },
   props: ['slug'],
   data() {
     return {
