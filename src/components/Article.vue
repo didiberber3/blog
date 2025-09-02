@@ -11,9 +11,6 @@
             </div>
           </header>
           
-          <!-- 文章目录导航 -->
-          <ArticleToc :content="article.content" />
-          
           <div class="article-body" v-html="renderedContent" ref="articleBody"></div>
           
           <footer class="article-footer">
@@ -30,7 +27,34 @@
     </div>
     
     <aside class="sidebar">
-      <!-- 侧栏内容可以保留，但不再显示目录 -->
+      <!-- 侧栏目录导航 -->
+      <div class="sidebar-toc" v-if="toc.length > 0">
+        <h3 class="toc-title">📑 目录导航</h3>
+        <nav class="toc-nav">
+          <ul class="toc-list">
+            <li 
+              v-for="heading in toc" 
+              :key="heading.id"
+              :class="[
+                'toc-item',
+                `toc-level-${heading.level}`,
+                { 'toc-active': activeHeading === heading.id }
+              ]"
+            >
+              <a 
+                :href="`#${heading.id}`"
+                class="toc-link"
+                @click.prevent="scrollToHeading(heading.id)"
+                :title="heading.text"
+              >
+                <span class="toc-link-text">{{ heading.text }}</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      
+      <!-- 其他侧栏内容 -->
       <div class="sidebar-content">
         <h3>相关文章</h3>
         <p>这里可以显示相关文章推荐</p>
@@ -43,7 +67,6 @@
 import { getArticleBySlug } from '../utils/articles.js'
 import { generateTableOfContents } from '../utils/toc.js'
 import MarkdownIt from 'markdown-it'
-import ArticleToc from './common/ArticleToc.vue'
 
 const md = new MarkdownIt({
   html: true,
@@ -53,14 +76,13 @@ const md = new MarkdownIt({
 
 export default {
   name: 'Article',
-  components: {
-    ArticleToc
-  },
   props: ['slug'],
   data() {
     return {
       article: null,
-      toc: []
+      toc: [],
+      activeHeading: null,
+      observer: null
     }
   },
   computed: {
@@ -81,8 +103,7 @@ export default {
         this.$nextTick(() => {
           this.generateToc()
           this.setupCodeBlocks()
-          // 触发content-update事件，通知父组件更新目录
-          this.$emit('content-update', this.article ? this.article.content : '')
+          this.setupIntersectionObserver()
         })
       },
       immediate: true
@@ -91,11 +112,8 @@ export default {
   methods: {
     loadArticle() {
       this.article = getArticleBySlug(this.slug)
-      // 文章加载后立即触发content-update事件
-      if (this.article) {
-        this.$emit('content-update', this.article.content)
-      }
     },
+    
     formatDate(dateString) {
       const date = new Date(dateString)
       return date.toLocaleDateString('zh-CN', {
@@ -104,9 +122,52 @@ export default {
         day: 'numeric'
       })
     },
+    
     generateToc() {
       this.toc = generateTableOfContents(this.$refs.articleBody)
     },
+    
+    setupIntersectionObserver() {
+      if (!('IntersectionObserver' in window) || !this.$refs.articleBody) return
+      
+      // 清理之前的观察器
+      if (this.observer) {
+        this.observer.disconnect()
+      }
+      
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              this.activeHeading = entry.target.id
+            }
+          })
+        },
+        {
+          rootMargin: '-20% 0px -80% 0px',
+          threshold: 0
+        }
+      )
+      
+      // 观察所有标题元素
+      this.toc.forEach(heading => {
+        const element = document.getElementById(heading.id)
+        if (element) {
+          this.observer.observe(element)
+        }
+      })
+    },
+    
+    scrollToHeading(id) {
+      const element = document.getElementById(id)
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        })
+      }
+    },
+    
     loadHighlightJS() {
       // 动态加载 highlight.js
       if (!window.hljs) {
@@ -125,6 +186,7 @@ export default {
         document.head.appendChild(script)
       }
     },
+    
     setupCodeBlocks() {
       if (!this.$refs.articleBody) return
       
@@ -173,6 +235,7 @@ export default {
         console.log(`Processed code block ${index + 1}: ${languageName}`) // 调试日志
       })
     },
+    
     getLanguageName(language) {
       const languageMap = {
         'javascript': 'JS',
@@ -251,8 +314,6 @@ export default {
         
         this.showCopyToast(event)
         
-        this.showCopyToast(event)
-        
         setTimeout(() => {
           button.classList.remove('copied')
           button.innerHTML = '📋'
@@ -289,6 +350,12 @@ export default {
           }
         }, 300)
       }, 1500)
+    }
+  },
+  
+  beforeUnmount() {
+    if (this.observer) {
+      this.observer.disconnect()
     }
   }
 }

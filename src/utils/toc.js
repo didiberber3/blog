@@ -13,9 +13,25 @@ export function generateTableOfContents(container) {
     const level = parseInt(heading.tagName.charAt(1))
     const text = heading.textContent.trim()
     
-    // 生成简单的ID
-    const id = `heading-${index}`
-    heading.id = id
+    // 生成更好的ID：基于文本内容
+    let id = heading.id
+    if (!id) {
+      // 如果没有ID，生成一个基于文本的ID
+      id = text
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, '') // 移除特殊字符
+        .replace(/\s+/g, '-')     // 空格替换为连字符
+        .replace(/-+/g, '-')      // 多个连字符替换为单个
+        .trim()
+      
+      // 如果ID为空或重复，使用索引
+      if (!id || document.getElementById(id)) {
+        id = `heading-${index}`
+      }
+      
+      // 设置标题的ID
+      heading.id = id
+    }
     
     toc.push({
       id,
