@@ -178,7 +178,7 @@ export default {
   border-radius: var(--radius-lg);
   padding: var(--spacing-2xl);
   position: sticky;
-  top: var(--spacing-2xl);
+  top: var(--scroll-offset);
   box-shadow: var(--shadow-md);
   border: 1px solid var(--color-border-primary);
   height: fit-content;

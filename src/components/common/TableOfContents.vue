@@ -153,7 +153,7 @@ export default {
   padding: var(--spacing-lg);
   margin-bottom: var(--spacing-xl);
   position: sticky;
-  top: var(--spacing-xl);
+  top: var(--scroll-offset);
 }
 
 .toc-header {

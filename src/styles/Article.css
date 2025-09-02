@@ -320,7 +320,7 @@
 .sidebar {
   width: 300px;
   position: sticky;
-  top: var(--spacing-2xl);
+  top: var(--scroll-offset);
   height: fit-content;
   background-color: var(--color-bg-secondary);
   border-radius: var(--radius-lg);
