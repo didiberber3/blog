@@ -6,7 +6,7 @@ const md = new MarkdownIt({
   typographer: true
 })
 
-class ArticleService {
+class ArticleServiceClass {
   constructor() {
     this.articles = new Map()
     this.initialized = false
@@ -17,7 +17,7 @@ class ArticleService {
     
     try {
       // 动态导入所有文章
-      const articleModules = import.meta.glob('/src/pages/*.md', { as: 'raw' })
+      const articleModules = import.meta.glob('/src/pages/*.md', { query: '?raw', import: 'default' })
       
       for (const [path, moduleLoader] of Object.entries(articleModules)) {
         const slug = this.extractSlugFromPath(path)
@@ -151,4 +151,4 @@ class ArticleService {
   }
 }
 
-export const ArticleService = new ArticleService()
+export const ArticleService = new ArticleServiceClass()
