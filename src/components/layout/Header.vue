@@ -1,33 +1,32 @@
 <template>
   <header class="header">
     <div class="header-container">
-      <h1 class="logo">
-        <router-link to="/">Didiberber</router-link>
-      </h1>
+      <div class="header-left">
+        <router-link to="/" class="logo">
+          <span class="logo-text">Didiberber's Blog</span>
+        </router-link>
+      </div>
       
-      <!-- 主导航区域 -->
-      <div class="nav-section">
-        <NavigationMenu />
-        
-        <!-- 主题切换 -->
-        <div class="theme-toggle-wrapper">
-          <ThemeToggle />
-        </div>
+      <Navigation />
+      
+      <div class="header-right">
+        <ThemeToggle @theme-change="$emit('theme-change', $event)" />
       </div>
     </div>
   </header>
 </template>
 
 <script>
-import ThemeToggle from '../common/ThemeToggle.vue'
-import NavigationMenu from '../common/NavigationMenu.vue'
+import Navigation from './Navigation.vue'
+import ThemeToggle from '../ui/ThemeToggle.vue'
 
 export default {
   name: 'Header',
   components: {
-    ThemeToggle,
-    NavigationMenu
-  }
+    Navigation,
+    ThemeToggle
+  },
+  emits: ['theme-change']
 }
 </script>
 
@@ -39,68 +38,55 @@ export default {
   top: 0;
   z-index: 100;
   backdrop-filter: blur(10px);
-  box-shadow: var(--shadow-sm);
-  height: var(--header-height);
 }
 
 .header-container {
-  max-width: var(--container-max-width-wide);
+  max-width: var(--container-max-width);
   margin: 0 auto;
   padding: 0 var(--spacing-xl);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  height: 100%;
-  gap: var(--spacing-lg);
+  justify-content: space-between;
+  height: 60px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
 }
 
 .logo {
-  margin: 0;
-  font-size: var(--font-size-2xl);
-  font-weight: var(--font-weight-bold);
-  flex-shrink: 0;
-}
-
-.logo a {
-  color: var(--color-primary);
   text-decoration: none;
-  transition: color var(--transition-normal);
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: 1.25rem;
+  transition: color var(--transition-fast);
 }
 
-.logo a:hover {
-  color: var(--color-primary-dark);
+.logo:hover {
+  color: var(--color-primary);
 }
 
-.logo a:active {
-  transform: scale(0.95);
+.logo-text {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-/* 导航区域 */
-.nav-section {
+.header-right {
   display: flex;
   align-items: center;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
 }
 
-.theme-toggle-wrapper {
-  display: flex;
-  align-items: center;
-}
-
-/* 响应式设计 */
 @media (max-width: 768px) {
   .header-container {
     padding: 0 var(--spacing-lg);
   }
-}
-
-@media (max-width: 480px) {
-  .logo {
-    font-size: var(--font-size-xl);
-  }
   
-  .header-container {
-    padding: 0 var(--spacing-md);
+  .logo-text {
+    font-size: 1.1rem;
   }
 }
 </style>

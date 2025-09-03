@@ -1,19 +1,4 @@
-/* 样式文件索引 - 统一导入所有组件样式 */
-
-/* CSS 变量系统 */
+/* 导入所有样式文件 */
 @import './variables.css';
-
-/* 公共样式 */
-@import './common.css';
-
-/* 全局样式 */
 @import './global.css';
-
-/* 滚动条样式系统 */
-@import './scrollbar.css';
-
-/* 组件样式 */
-@import './Home.css';
-@import './AllArticles.css';
-@import './Article.css';
-@import './About.css';
+@import './components.css';
